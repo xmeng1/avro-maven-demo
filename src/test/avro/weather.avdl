@@ -1,0 +1,8 @@
+@version("1.0.5")
+@namespace("science.mengxin.java.avro.demo")
+protocol WeatherStation {
+  record Station {
+    string name;
+  }
+  string getReading();
+} 
