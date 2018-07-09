@@ -1,0 +1,1 @@
+The minimal demo to use maven plugin to generate code by using avro
