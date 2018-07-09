@@ -25,11 +25,31 @@
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro-maven-plugin</artifactId>
                 <version>1.8.2</version>
+                <!--global plugin configuration which used for run goal separately-->
+                <configuration>
+                    <!--The Avro source directory for schema, protocol and IDL files.-->
+                    <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+                    <!--The directory where Avro writes code-generated sources. IMPORTANT!! -->
+                    <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                    <!--The input directory containing any Avro files used in testing.-->
+                    <testSourceDirectory>${project.basedir}/src/test/avro/</testSourceDirectory>
+                    <!--The output directory where Avro writes code-generated files for your testing purposes.-->
+                    <testOutputDirectory>${project.basedir}/src/test/java/</testOutputDirectory>
+                </configuration>
                 <executions>
                     <execution>
+                        <!--
+                        IMPORTANT: Because this configuration is set in the execution with phase `generate-sources`.
+                        So only run compile or package which include this phase will apply this configuration.
+                        So if only make this configuration, run `mvn avro:schema` will only generate to the target
+                        folder with default configuration.
+                        -->
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>schema</goal>
+                            <!--If you want to generate other code, need add more goals-->
+                            <goal>protocol</goal>
+                            <goal>idl-protocol</goal>
                         </goals>
                         <!---->
                         <configuration>
