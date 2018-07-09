@@ -1,0 +1,8 @@
+{"type": "record", "name": "science.mengxin.java.avro.demo",
+ "doc": "A weather reading.",
+ "fields": [
+     {"name": "station", "type": "string", "order": "ignore"},
+     {"name": "time", "type": "long"},
+     {"name": "temp", "type": "int"}
+ ]
+}

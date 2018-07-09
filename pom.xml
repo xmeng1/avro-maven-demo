@@ -8,5 +8,75 @@
     <artifactId>avro-maven-demo</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
+    <dependencies>
 
+        <!-- avro Dependency-->
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>1.8.2</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>1.8.2</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                        </goals>
+                        <!---->
+                        <configuration>
+                            <!--default is ${basedir}/src/main/avro
+                            The Avro source directory for schema, protocol and IDL files.-->
+                            <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+
+                            <!--default is ${project.build.directory}/generated-sources/avro
+                             The directory where Avro writes code-generated sources. IMPORTANT!! -->
+                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+
+                            <!--default is ${basedir}/src/test/avro
+                            The input directory containing any Avro files used in testing.-->
+                            <testSourceDirectory>${project.basedir}/src/test/avro/</testSourceDirectory>
+
+                            <!--default is ${project.build.directory}/generated-test-sources/avro
+                            The output directory where Avro writes code-generated files for your testing purposes.-->
+                            <testOutputDirectory>${project.basedir}/src/test/java/</testOutputDirectory>
+
+                            <!--fieldVisibility PUBLIC_DEPRECATED
+                            Determines the accessibility of fields (e.g. whether they are public or private).
+                            Must be one of PUBLIC, PUBLIC_DEPRECATED or PRIVATE. PUBLIC_DEPRECATED merely
+                            adds a deprecated annotation to each field, e.g. "@Deprecated public long time".-->
+
+
+                            <!--In addition, the includes and testIncludes configurables can also be used to
+                            specify alternative file extensions to the defaults, which are **/*.avsc, **/*.avpr
+                            and **/*.avdl for schema, protocol and IDL files respectively.-->
+                            <!--<includes>
+                              <include>**/*.avro</include>
+                            </includes>
+                            <testIncludes>
+                              <testInclude>**/*.test</testInclude>
+                            </testIncludes>-->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
